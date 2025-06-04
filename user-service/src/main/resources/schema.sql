@@ -1,0 +1,23 @@
+-- 创建用户表
+CREATE TABLE IF NOT EXISTS users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    nickname VARCHAR(50),
+    birthday DATE,
+    avatar VARCHAR(255),
+    phone_number VARCHAR(20),
+    auth_provider VARCHAR(20),
+    provider_id VARCHAR(100),
+    level INT NOT NULL DEFAULT 1,
+    experience INT NOT NULL DEFAULT 0,
+    user_rank VARCHAR(50) NOT NULL DEFAULT 'NEWCOMER',
+    voting_count INT NOT NULL DEFAULT 0,
+    comment_count INT NOT NULL DEFAULT 0,
+    liked_count INT NOT NULL DEFAULT 0,
+    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    is_enabled BOOLEAN NOT NULL DEFAULT FALSE,
+    is_locked BOOLEAN NOT NULL DEFAULT FALSE
+); 

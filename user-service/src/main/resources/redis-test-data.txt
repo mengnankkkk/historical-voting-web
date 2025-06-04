@@ -1,0 +1,21 @@
+# Redis 测试数据说明
+# 以下命令可以在 Redis CLI 中执行来创建测试数据
+
+# 验证码 (5分钟过期)
+SET "verification:user1@example.com" "123456" EX 300
+SET "verification:user2@example.com" "654321" EX 300
+
+# 访问令牌 (30分钟过期)
+SET "token:access:admin" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." EX 1800
+SET "token:access:test_user1" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." EX 1800
+
+# 刷新令牌 (7天过期)
+SET "token:refresh:admin" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." EX 604800
+SET "token:refresh:test_user1" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." EX 604800
+
+# 令牌黑名单 (用于已注销的令牌)
+SET "token:blacklist:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." "" EX 1800
+
+# 用户在线状态
+SET "user:online:admin" "true" EX 300
+SET "user:online:test_user1" "true" EX 300 

@@ -1,0 +1,133 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: user-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/historical_voting?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 10000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+
+  mail:
+    host: smtp.163.com
+    port: 465
+    username:
+    password:
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+
+  # OAuth2配置
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id:
+            client-secret:
+            redirect-uri: "{baseUrl}/login/oauth2/code/github"
+            scope: 
+              - read:user
+              - user:email
+        provider:
+          github:
+            authorization-uri:
+            token-uri:
+            user-info-uri:
+            user-name-attribute:
+
+jwt:
+  access-token:
+    expiration: 1800000  # 30分钟
+  refresh-token:
+    expiration: 604800000  # 7天
+
+logging:
+  level:
+    root: INFO
+    com.historical.voting: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+
+# 以下配置已禁用
+# spring.security.oauth2.client.registration.wechat:
+#   client-id: your-wechat-client-id
+#   client-secret: your-wechat-client-secret
+#   redirect-uri: "{baseUrl}/login/oauth2/code/wechat"
+#   authorization-grant-type: authorization_code
+#   scope: snsapi_userinfo
+
+# spring.security.oauth2.client.registration.qq:
+#   client-id: your-qq-client-id
+#   client-secret: your-qq-client-secret
+#   redirect-uri: "{baseUrl}/login/oauth2/code/qq"
+#   authorization-grant-type: authorization_code
+#   scope: get_user_info
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 500MB
+      max-request-size: 1GB
+
+  # 文件存储配置
+  file-storage:
+    # 可选值: local, oss, minio, tencent
+    type: tencent
+    local:
+      upload-path: /uploads/
+    oss:
+      endpoint: your-oss-endpoint
+      access-key-id: your-access-key-id
+      access-key-secret: your-access-key-secret
+      bucket-name: your-bucket-name
+    minio:
+      endpoint: http://your-minio-endpoint:9000
+      access-key: your-minio-access-key
+      secret-key: your-minio-secret-key
+      bucket-name: your-minio-bucket-name
+    tencent:
+      secret-id:
+      secret-key:
+      region:
+      bucket-name:
+
+  # TCP 服务配置
+  tcp:
+    port: 9999
+
+app:
+  upload:
+    image-path: ${user.home}/historical-voting/uploads/images
+    video-path: ${user.home}/historical-voting/uploads/videos
+    thumbnail-path: ${user.home}/historical-voting/uploads/thumbnails

@@ -1,0 +1,99 @@
+/* 全局样式 */
+body {
+    background-color: #f8f9fa;
+}
+
+/* 导航栏样式 */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* 卡片样式 */
+.card {
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    margin-bottom: 1rem;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+/* 用户头像样式 */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 投票项目样式 */
+.vote-item {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.vote-item:last-child {
+    border-bottom: none;
+}
+
+/* 排行榜样式 */
+.rank-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.rank-item:last-child {
+    border-bottom: none;
+}
+
+.rank-number {
+    font-weight: bold;
+    margin-right: 1rem;
+    min-width: 24px;
+}
+
+/* 表单样式 */
+.form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* 按钮样式 */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* 加载动画样式 */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+/* 错误消息样式 */
+.error-message {
+    color: #dc3545;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* 成功消息样式 */
+.success-message {
+    color: #198754;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+} 
