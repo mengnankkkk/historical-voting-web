@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.scripting.support.ResourceScriptSource;
 
 @Configuration
 public class RedisConfig {
@@ -45,14 +46,14 @@ public class RedisConfig {
     }
 
     /**
-     * 导入优惠卷发放lua脚本
+     * 导入优惠卷发放lua脚本,SpringBoot 自动封装为 EVALSHA 模式执行，一次加载后多次复用，无需每次传脚本内容。
      * @return
      */
 
     @Bean
     public DefaultRedisScript<Long> couponLuaScript(){
         DefaultRedisScript<Long> script = new DefaultRedisScript<>();
-        script.setLocation(new ClassPathResource("\"lua/coupon_acquire.lua"));
+        script.setScriptSource(new ResourceScriptSource(new ClassPathResource("lua/coupon_acquire.lua")));
         script.setResultType(Long.class);
         return script;
     }
