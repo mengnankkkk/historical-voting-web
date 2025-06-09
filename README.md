@@ -1,8 +1,8 @@
-# Historical Voting Web 项目文档
+# shopping-web
 
 ## 1. 项目概述
 
-Historical Voting Web 是一个基于 Spring Boot 2.7.18 开发的历史投票系统，采用微服务架构设计。系统支持用户注册、登录、OAuth2 认证、文件上传等功能。
+ shopping-web是一个基于 Spring Boot 2.7.18 开发的商城项目，采用微服务架构设计。系统支持用户注册、登录、OAuth2 认证、文件上传等功能。
 
 ## 2. 技术栈
 
