@@ -1,9 +1,10 @@
 package com.historical.voting.user.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.historical.voting.user.annotation.RateLimit;
 import com.historical.voting.user.config.JwtConfig;
 import com.historical.voting.user.entity.User;
-import com.historical.voting.user.entity.UserRank;
+import com.historical.voting.user.entity.type.UserRank;
 import com.historical.voting.user.exception.BusinessException;
 
 import com.historical.voting.user.mapper.UserMapper;
@@ -32,6 +33,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     private final StringRedisTemplate redisTemplate;
 
     @Transactional
+    @RateLimit(permitsPerSecond = 3,key ="#ip")
     public void register(String username, String password, String email, String verificationCode) {
         // 验证验证码
         if (!emailService.verifyCode(email, verificationCode)) {
@@ -56,6 +58,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         userRepository.save(user);
     }
 
+    @RateLimit(permitsPerSecond = 5,key = "#ip")
     public Map<String, String> login(String username, String password) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new BusinessException("用户名或密码错误"));
@@ -104,6 +107,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         redisTemplate.delete(refreshTokenKey);
     }
 
+    @RateLimit(permitsPerSecond = 3,key = "#ip")
     public void updateExperience(String username, int amount) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new BusinessException("用户不存在"));
@@ -115,6 +119,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         
         userRepository.save(user);
     }
+
 
     private void checkAndUpdateLevel(User user) {
         int currentExp = user.getExperience();

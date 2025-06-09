@@ -1,6 +1,6 @@
 package com.historical.voting.user.Factory;
 
-import com.historical.voting.user.entity.GraceType;
+import com.historical.voting.user.entity.type.GraceType;
 import com.historical.voting.user.strategy.GraceStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
