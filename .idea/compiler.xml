@@ -18,7 +18,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="historical-voting-web" options="" />
+      <module name="shopping-mengnan" options="" />
     </option>
   </component>
 </project>

@@ -1,5 +1,7 @@
 package com.historical.voting.user.config;
 
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,4 +21,4 @@ public class FileUploadConfig {
         factory.setMaxRequestSize(DataSize.ofGigabytes(1));
         return factory.createMultipartConfig();
     }
-} 
+}

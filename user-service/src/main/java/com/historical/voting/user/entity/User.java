@@ -1,6 +1,8 @@
 package com.historical.voting.user.entity;
 
 import javax.persistence.*;
+
+import com.historical.voting.user.entity.type.UserRank;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

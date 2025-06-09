@@ -1,4 +1,4 @@
-package com.historical.voting.user.entity;
+package com.historical.voting.user.entity.type;
 
 public enum UserRank {
     NEWCOMER("新人"),

@@ -3,16 +3,15 @@ package com.historical.voting.user.service.Impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.historical.voting.user.Factory.GraceStrategyFactory;
+import com.historical.voting.user.annotation.RateLimit;
 import com.historical.voting.user.entity.Coupon;
-import com.historical.voting.user.entity.GraceType;
+import com.historical.voting.user.entity.type.GraceType;
 import com.historical.voting.user.entity.User;
 import com.historical.voting.user.mapper.CouponMapper;
 import com.historical.voting.user.mapper.UserMapper;
 import com.historical.voting.user.service.CouponService;
 import com.historical.voting.user.strategy.GraceStrategy;
-import jdk.internal.dynalink.linker.LinkerServices;
 import lombok.extern.slf4j.Slf4j;
-import org.omg.CORBA.TIMEOUT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -50,6 +49,7 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
      * @return
      */
     @Override
+    @RateLimit(permitsPerSecond = 3,key = "#ip")
     public int acquireCoupon(Long couponId, Long userId) {
         String limitKey = "coupon:req:" + couponId + ":" + userId;
         String stockKey = "coupon:stock:" + couponId;

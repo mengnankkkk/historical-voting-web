@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.historical.voting</groupId>
-    <artifactId>historical-voting-web</artifactId>
+    <artifactId>shopping-mengnan</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -14,7 +14,7 @@
     </modules>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>13</java.version>
         <spring.boot.version>2.7.18</spring.boot.version>
         <mysql.version>8.0.33</mysql.version>
         <jwt.version>0.11.5</jwt.version>
