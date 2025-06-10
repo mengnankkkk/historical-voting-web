@@ -1,5 +1,6 @@
 package com.historical.voting.user;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement // 启用事务管理
 @EntityScan(basePackages = "com.historical.voting.*.entity")
 @EnableJpaRepositories(basePackages = "com.historical.voting.*.repository")
+@MapperScan("com.historical.voting.user.mapper")
 public class Application {
 
     public static void main(String[] args) {

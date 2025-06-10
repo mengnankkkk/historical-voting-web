@@ -1,7 +1,7 @@
 package com.historical.voting.user.Factory;
 
 import com.historical.voting.user.strategy.TranscodingStrategy;
-import com.nimbusds.jose.crypto.impl.MACProvider;
+
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

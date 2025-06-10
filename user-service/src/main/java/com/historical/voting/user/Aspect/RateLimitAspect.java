@@ -1,4 +1,4 @@
-package com.historical.voting.user.config;
+package com.historical.voting.user.Aspect;
 
 
 import com.historical.voting.user.annotation.RateLimit;
@@ -45,7 +45,7 @@ public class RateLimitAspect {
         String message  =rateLimit.message();
 
 
-        if (!rateLimiterUtil.resolveBucket(key,permits).tryConsume(1)){
+        if (!rateLimiterUtil.resolveLimiter(key,permits).tryAcquire(1)){
             throw new RateLimitException(message);
         }
 

@@ -43,7 +43,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private boolean shouldSkipAuthentication(String path) {
         return path.startsWith("/api/users/register") || 
                path.startsWith("/api/users/login") || 
-               path.startsWith("/api/users/oauth2") ||
                !path.startsWith("/api");
     }
 

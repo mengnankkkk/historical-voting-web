@@ -12,6 +12,4 @@ public interface UserService extends IService<User> {
     public void updateExperience(String username, int amount);
     public User getUserProfile(String username);
     public void updateProfile(String username, User updateInfo);
-    public Map<String, String> handleOAuth2Login(String username, String email, String avatarUrl);
-
 }

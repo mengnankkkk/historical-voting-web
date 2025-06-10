@@ -166,45 +166,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
 
         userRepository.save(user);
     }
-
-    public Map<String, String> handleOAuth2Login(String username, String email, String avatarUrl) {
-        // 检查用户是否已存在
-        User user = userRepository.findByUsername(username)
-                .orElseGet(() -> {
-                    // 创建新用户
-                    User newUser = new User();
-                    newUser.setUsername(username);
-                    newUser.setEmail(email);
-                    newUser.setAvatar(avatarUrl);
-                    newUser.setAuthProvider("GITHUB");
-                    newUser.setIsEnabled(true);
-                    newUser.setNickname(username); // 设置默认昵称
-                    newUser.setPassword(passwordEncoder.encode(generateRandomPassword()));
-                    return userRepository.save(newUser);
-                });
-
-        // 如果用户存在但是不是通过GitHub注册的，抛出异常
-        if (!"GITHUB".equals(user.getAuthProvider())) {
-            throw new BusinessException("您已经使用其他方式注册，请使用对应的登录方式");
-        }
-
-        // 生成令牌
-        String accessToken = jwtConfig.generateAccessToken(username);
-        String refreshToken = jwtConfig.generateRefreshToken(username);
-
-        // 存储令牌到Redis
-        String accessTokenKey = "token:access:" + username;
-        String refreshTokenKey = "token:refresh:" + username;
-        redisTemplate.opsForValue().set(accessTokenKey, accessToken, 30, TimeUnit.MINUTES);
-        redisTemplate.opsForValue().set(refreshTokenKey, refreshToken, 7, TimeUnit.DAYS);
-
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("accessToken", accessToken);
-        tokens.put("refreshToken", refreshToken);
-        return tokens;
-    }
-
-    private String generateRandomPassword() {
-        return UUID.randomUUID().toString();
-    }
 } 
